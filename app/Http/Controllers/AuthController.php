@@ -6,52 +6,86 @@ use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
-/**
- * Register a new user.
- *
- * @bodyParam name string required The user's name.
- * @bodyParam email string required The user's email.
- * @bodyParam password string required The password (min 6).
- * @bodyParam password_confirmation string required Must match the password.
- */
-
 class AuthController extends Controller
 {
-    protected $authService;
     use ValidatesRequests;
+
+    protected $authService;
 
     public function __construct(AuthService $authService)
     {
         $this->authService = $authService;
     }
-  
+
+    /**
+     * Register a new user.
+     *
+     * @bodyParam name string required User's full name. Example: John Doe
+     * @bodyParam email string required User's email address. Example: john@example.com
+     * @bodyParam password string required Password (minimum 6 characters). Example: secret123
+     * @bodyParam password_confirmation string required Password confirmation. Example: secret123
+     *
+     * @response 200 {
+     *   "user": {
+     *     "id": 1,
+     *     "name": "John Doe",
+     *     "email": "john@example.com"
+     *   },
+     *   "token": "some-generated-token"
+     * }
+     */
     public function register(Request $request)
     {
-        $this->validate($request, [
+        $validated = $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $result = $this->authService->register($request->all());
+        $result = $this->authService->register($validated);
 
         return response()->json($result);
     }
-  
+
+    /**
+     * Log in a user and create token.
+     *
+     * @bodyParam email string required User's email address. Example: john@example.com
+     * @bodyParam password string required Password. Example: secret123
+     *
+     * @response 200 {
+     *   "user": {
+     *     "id": 1,
+     *     "name": "John Doe",
+     *     "email": "john@example.com"
+     *   },
+     *   "token": "some-generated-token"
+     * }
+     * @response 401 {
+     *   "message": "Invalid credentials"
+     * }
+     */
     public function login(Request $request)
     {
-        $this->validate($request, [
+        $validated = $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        $result = $this->authService->login($request->all());
+        $result = $this->authService->login($validated);
 
         return response()->json($result);
     }
-/**
- * @authenticated
- */
+
+    /**
+     * Log out the authenticated user (delete current access token).
+     *
+     * @authenticated
+     *
+     * @response 200 {
+     *   "message": "Successfully logged out"
+     * }
+     */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
