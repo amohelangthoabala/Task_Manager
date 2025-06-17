@@ -100,7 +100,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Log in a user and create token.'
+      title: 'Log in a user and create a token.'
       description: ''
       authenticated: false
       custom: []

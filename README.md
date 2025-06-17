@@ -58,7 +58,7 @@ docker compose -f compose.dev.yaml exec workspace php artisan migrate
 
 ## 🔐 Authentication
 
-1. Register or log in via the API.
+1. Generate a test user and get a token
 2. Use the received token in your request headers:
 
 Authorization: Bearer {token}
