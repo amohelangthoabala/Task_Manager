@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,10 +18,44 @@ class AuthController extends Controller
     {
         $this->authService = $authService;
     }
+    
+    /**
+     * Authentication Token.
+     * 
+     * @group Auth Token
+     * 
+     * If a test user (test@example.com) does not exist, it will be created first.
+     * 
+     * @response 200 {
+     *   "token": "newly-created-test-user-token",
+     *   "user": {
+     *     "id": 1,
+     *     "name": "Test User",
+     *     "email": "test@example.com"
+     *   }
+     * }
+     */
+    public function generateTestUserToken()
+    {
+        $user = User::firstOrCreate([
+            'email' => 'test@example.com',
+        ], [
+            'name' => 'Test User',
+            'password' => Hash::make('secret'), // fallback password
+        ]);
+
+        $token = $user->createToken('testing')->plainTextToken;
+
+        return response()->json([
+            'token' => $token,
+            'user' => $user,
+        ]);
+    }
+    
 
     /**
      * Register a new user.
-     *
+     * 
      * @bodyParam name string required User's full name. Example: John Doe
      * @bodyParam email string required User's email address. Example: john@example.com
      * @bodyParam password string required Password (minimum 6 characters). Example: secret123
@@ -48,8 +84,8 @@ class AuthController extends Controller
     }
 
     /**
-     * Log in a user and create token.
-     *
+     * Log in a user and create a token.
+     * 
      * @bodyParam email string required User's email address. Example: john@example.com
      * @bodyParam password string required Password. Example: secret123
      *
@@ -79,7 +115,7 @@ class AuthController extends Controller
 
     /**
      * Log out the authenticated user (delete current access token).
-     *
+     * 
      * @authenticated
      *
      * @response 200 {
