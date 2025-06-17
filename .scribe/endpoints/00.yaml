@@ -10,7 +10,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Register a new user.'
       description: ''
       authenticated: false
       custom: []
@@ -24,51 +24,65 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: "The user's name."
+        description: "User's full name."
         required: true
-        example: architecto
+        example: 'John Doe'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       email:
         name: email
-        description: "The user's email."
+        description: "User's email address."
         required: true
-        example: gbailey@example.net
+        example: john@example.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       password:
         name: password
-        description: 'The password (min 6).'
+        description: 'Password (minimum 6 characters).'
         required: true
-        example: '|]|{+-'
+        example: secret123
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       password_confirmation:
         name: password_confirmation
-        description: 'Must match the password.'
+        description: 'Password confirmation.'
         required: true
-        example: architecto
+        example: secret123
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: architecto
-      email: gbailey@example.net
-      password: '|]|{+-'
-      password_confirmation: architecto
+      name: 'John Doe'
+      email: john@example.com
+      password: secret123
+      password_confirmation: secret123
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "user": {
+              "id": 1,
+              "name": "John Doe",
+              "email": "john@example.com"
+            },
+            "token": "some-generated-token"
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth: []
     controller: null
@@ -84,7 +98,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Log in a user and create token.'
       description: ''
       authenticated: false
       custom: []
@@ -98,51 +112,52 @@ endpoints:
     bodyParameters:
       email:
         name: email
-        description: "The user's email."
+        description: "User's email address."
         required: true
-        example: gbailey@example.net
+        example: john@example.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       password:
         name: password
-        description: 'The password (min 6).'
+        description: Password.
         required: true
-        example: '|]|{+-'
+        example: secret123
         type: string
         enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      name:
-        name: name
-        description: "The user's name."
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      password_confirmation:
-        name: password_confirmation
-        description: 'Must match the password.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
-      email: gbailey@example.net
-      password: '|]|{+-'
-      name: architecto
-      password_confirmation: architecto
+      email: john@example.com
+      password: secret123
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "user": {
+              "id": 1,
+              "name": "John Doe",
+              "email": "john@example.com"
+            },
+            "token": "some-generated-token"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 401
+        content: |-
+          {
+            "message": "Invalid credentials"
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth: []
     controller: null
@@ -158,128 +173,12 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Log out the authenticated user (delete current access token).'
       description: ''
       authenticated: true
       custom: []
     headers:
       Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: "The user's name."
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      email:
-        name: email
-        description: "The user's email."
-        required: true
-        example: gbailey@example.net
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      password:
-        name: password
-        description: 'The password (min 6).'
-        required: true
-        example: '|]|{+-'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      password_confirmation:
-        name: password_confirmation
-        description: 'Must match the password.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: architecto
-      email: gbailey@example.net
-      password: '|]|{+-'
-      password_confirmation: architecto
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: api/user
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: api/hello
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -292,15 +191,18 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"message":"Hello from API!"}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
+        content: |-
+          {
+            "message": "Successfully logged out"
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
     controller: null
     method: null
     route: null
@@ -314,7 +216,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Get all tasks.'
       description: ''
       authenticated: true
       custom: []
@@ -331,19 +233,25 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
+        status: 200
+        content: |-
+          [{
+            "id": 1,
+            "title": "Task 1",
+            "description": "Description",
+            "assigned_to": 2,
+            "status": "pending",
+            "start_date": "2025-06-01",
+            "end_date": "2025-06-10"
+          }]
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
     controller: null
     method: null
     route: null
@@ -357,7 +265,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Create a new task.'
       description: ''
       authenticated: true
       custom: []
@@ -372,78 +280,93 @@ endpoints:
     bodyParameters:
       title:
         name: title
-        description: 'Must not be greater than 255 characters.'
+        description: 'The title of the task.'
         required: true
-        example: b
+        example: '"New task"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       description:
         name: description
-        description: ''
+        description: 'The description of the task.'
         required: false
-        example: 'Eius et animi quos velit et.'
+        example: '"Task details"'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
       assigned_to:
         name: assigned_to
-        description: 'The <code>id</code> of an existing record in the users table.'
+        description: 'User ID the task is assigned to.'
         required: true
-        example: architecto
-        type: string
+        example: 2
+        type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       status:
         name: status
-        description: ''
+        description: 'The status of the task. Possible values: pending, in_progress, completed.'
         required: true
-        example: architecto
+        example: pending
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       start_date:
         name: start_date
-        description: 'Must be a valid date.'
+        description: 'The start date of the task.'
         required: false
-        example: '2025-06-16T22:54:27'
-        type: string
+        example: '"2025-06-01"'
+        type: date
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
       end_date:
         name: end_date
-        description: 'Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
+        description: 'The end date of the task (must be after or equal to start_date).'
         required: false
-        example: '2051-07-10'
-        type: string
+        example: '"2025-06-10"'
+        type: date
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
     cleanBodyParameters:
-      title: b
-      description: 'Eius et animi quos velit et.'
-      assigned_to: architecto
-      status: architecto
-      start_date: '2025-06-16T22:54:27'
-      end_date: '2051-07-10'
+      title: '"New task"'
+      description: '"Task details"'
+      assigned_to: 2
+      status: pending
+      start_date: '"2025-06-01"'
+      end_date: '"2025-06-10"'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "id": 3,
+            "title": "New task",
+            "description": "Task details",
+            "assigned_to": 2,
+            "status": "pending",
+            "start_date": "2025-06-01",
+            "end_date": "2025-06-10"
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
     controller: null
     method: null
     route: null
@@ -457,7 +380,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Get a specific task by ID.'
       description: ''
       authenticated: true
       custom: []
@@ -470,14 +393,14 @@ endpoints:
         name: id
         description: 'The ID of the task.'
         required: true
-        example: architecto
-        type: string
+        example: 17
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -485,19 +408,34 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "title": "Task 1",
+            "description": "Description",
+            "assigned_to": 2,
+            "status": "pending",
+            "start_date": "2025-06-01",
+            "end_date": "2025-06-10"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Task not found"
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
     controller: null
     method: null
     route: null
@@ -511,8 +449,8 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Update only the status of a task.'
+      description: 'Here are status options: pending, active, completed, deferred, rejected'
       authenticated: true
       custom: []
     headers:
@@ -524,90 +462,60 @@ endpoints:
         name: id
         description: 'The ID of the task.'
         required: true
-        example: architecto
-        type: string
+        example: 17
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      title:
-        name: title
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: b
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      description:
-        name: description
-        description: ''
-        required: false
-        example: 'Eius et animi quos velit et.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      assigned_to:
-        name: assigned_to
-        description: 'The <code>id</code> of an existing record in the users table.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
       status:
         name: status
-        description: ''
-        required: false
-        example: null
+        description: 'The status of the task. Possible values: pending, active, completed, deferred, rejected'
+        required: true
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      start_date:
-        name: start_date
-        description: 'Must be a valid date.'
-        required: false
-        example: '2025-06-16T22:54:27'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      end_date:
-        name: end_date
-        description: 'Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
-        required: false
-        example: '2051-07-10'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
     cleanBodyParameters:
-      title: b
-      description: 'Eius et animi quos velit et.'
-      assigned_to: architecto
-      start_date: '2025-06-16T22:54:27'
-      end_date: '2051-07-10'
+      status: consequatur
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "id": 3,
+            "title": "Some task",
+            "description": "Some description",
+            "assigned_to": 1,
+            "status": "active",
+            "start_date": "2025-06-01",
+            "end_date": "2025-06-10"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Task not found"
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
     controller: null
     method: null
     route: null
@@ -621,7 +529,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Delete a task.'
       description: ''
       authenticated: true
       custom: []
@@ -634,25 +542,43 @@ endpoints:
         name: id
         description: 'The ID of the task.'
         required: true
-        example: architecto
-        type: string
+        example: 17
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Task deleted"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Task not found"
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
     controller: null
     method: null
     route: null
