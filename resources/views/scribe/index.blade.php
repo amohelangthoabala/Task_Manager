@@ -72,34 +72,28 @@
                 </li>
                                     <ul id="tocify-subheader-endpoints" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="endpoints-POSTapi-auth-register">
-                                <a href="#endpoints-POSTapi-auth-register">POST api/auth/register</a>
+                                <a href="#endpoints-POSTapi-auth-register">Register a new user.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-auth-login">
-                                <a href="#endpoints-POSTapi-auth-login">POST api/auth/login</a>
+                                <a href="#endpoints-POSTapi-auth-login">Log in a user and create token.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-auth-logout">
-                                <a href="#endpoints-POSTapi-auth-logout">POST api/auth/logout</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-user">
-                                <a href="#endpoints-GETapi-user">GET api/user</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-hello">
-                                <a href="#endpoints-GETapi-hello">GET api/hello</a>
+                                <a href="#endpoints-POSTapi-auth-logout">Log out the authenticated user (delete current access token).</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-tasks">
-                                <a href="#endpoints-GETapi-tasks">GET api/tasks</a>
+                                <a href="#endpoints-GETapi-tasks">Get all tasks.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-tasks">
-                                <a href="#endpoints-POSTapi-tasks">POST api/tasks</a>
+                                <a href="#endpoints-POSTapi-tasks">Create a new task.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-tasks--id-">
-                                <a href="#endpoints-GETapi-tasks--id-">GET api/tasks/{id}</a>
+                                <a href="#endpoints-GETapi-tasks--id-">Get a specific task by ID.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-PUTapi-tasks--id-">
-                                <a href="#endpoints-PUTapi-tasks--id-">PUT api/tasks/{id}</a>
+                                <a href="#endpoints-PUTapi-tasks--id-">Update only the status of a task.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-tasks--id-">
-                                <a href="#endpoints-DELETEapi-tasks--id-">DELETE api/tasks/{id}</a>
+                                <a href="#endpoints-DELETEapi-tasks--id-">Delete a task.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -112,7 +106,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: June 16, 2025</li>
+        <li>Last updated: June 17, 2025</li>
     </ul>
 </div>
 
@@ -137,7 +131,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
     
 
-                                <h2 id="endpoints-POSTapi-auth-register">POST api/auth/register</h2>
+                                <h2 id="endpoints-POSTapi-auth-register">Register a new user.</h2>
 
 <p>
 </p>
@@ -154,10 +148,10 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"architecto\",
-    \"email\": \"gbailey@example.net\",
-    \"password\": \"|]|{+-\",
-    \"password_confirmation\": \"architecto\"
+    \"name\": \"John Doe\",
+    \"email\": \"john@example.com\",
+    \"password\": \"secret123\",
+    \"password_confirmation\": \"secret123\"
 }"
 </code></pre></div>
 
@@ -173,10 +167,10 @@ const headers = {
 };
 
 let body = {
-    "name": "architecto",
-    "email": "gbailey@example.net",
-    "password": "|]|{+-",
-    "password_confirmation": "architecto"
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "secret123",
+    "password_confirmation": "secret123"
 };
 
 fetch(url, {
@@ -188,7 +182,21 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-auth-register">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;user&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;email&quot;: &quot;john@example.com&quot;
+    },
+    &quot;token&quot;: &quot;some-generated-token&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-auth-register" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-auth-register"></span>:
@@ -265,10 +273,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-auth-register"
-               value="architecto"
+               value="John Doe"
                data-component="body">
     <br>
-<p>The user's name. Example: <code>architecto</code></p>
+<p>User's full name. Example: <code>John Doe</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -276,10 +284,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-auth-register"
-               value="gbailey@example.net"
+               value="john@example.com"
                data-component="body">
     <br>
-<p>The user's email. Example: <code>gbailey@example.net</code></p>
+<p>User's email address. Example: <code>john@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -287,10 +295,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-auth-register"
-               value="|]|{+-"
+               value="secret123"
                data-component="body">
     <br>
-<p>The password (min 6). Example: <code>|]|{+-</code></p>
+<p>Password (minimum 6 characters). Example: <code>secret123</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
@@ -298,14 +306,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password_confirmation"                data-endpoint="POSTapi-auth-register"
-               value="architecto"
+               value="secret123"
                data-component="body">
     <br>
-<p>Must match the password. Example: <code>architecto</code></p>
+<p>Password confirmation. Example: <code>secret123</code></p>
         </div>
         </form>
 
-                    <h2 id="endpoints-POSTapi-auth-login">POST api/auth/login</h2>
+                    <h2 id="endpoints-POSTapi-auth-login">Log in a user and create token.</h2>
 
 <p>
 </p>
@@ -322,10 +330,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"gbailey@example.net\",
-    \"password\": \"|]|{+-\",
-    \"name\": \"architecto\",
-    \"password_confirmation\": \"architecto\"
+    \"email\": \"john@example.com\",
+    \"password\": \"secret123\"
 }"
 </code></pre></div>
 
@@ -341,10 +347,8 @@ const headers = {
 };
 
 let body = {
-    "email": "gbailey@example.net",
-    "password": "|]|{+-",
-    "name": "architecto",
-    "password_confirmation": "architecto"
+    "email": "john@example.com",
+    "password": "secret123"
 };
 
 fetch(url, {
@@ -356,7 +360,30 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-auth-login">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;user&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;email&quot;: &quot;john@example.com&quot;
+    },
+    &quot;token&quot;: &quot;some-generated-token&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Invalid credentials&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-auth-login" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-auth-login"></span>:
@@ -433,10 +460,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-auth-login"
-               value="gbailey@example.net"
+               value="john@example.com"
                data-component="body">
     <br>
-<p>The user's email. Example: <code>gbailey@example.net</code></p>
+<p>User's email address. Example: <code>john@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -444,36 +471,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-auth-login"
-               value="|]|{+-"
+               value="secret123"
                data-component="body">
     <br>
-<p>The password (min 6). Example: <code>|]|{+-</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="name"                data-endpoint="POSTapi-auth-login"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>The user's name. Example: <code>architecto</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="password_confirmation"                data-endpoint="POSTapi-auth-login"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>Must match the password. Example: <code>architecto</code></p>
+<p>Password. Example: <code>secret123</code></p>
         </div>
         </form>
 
-                    <h2 id="endpoints-POSTapi-auth-logout">POST api/auth/logout</h2>
+                    <h2 id="endpoints-POSTapi-auth-logout">Log out the authenticated user (delete current access token).</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -490,14 +495,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://localhost/api/auth/logout" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"name\": \"architecto\",
-    \"email\": \"gbailey@example.net\",
-    \"password\": \"|]|{+-\",
-    \"password_confirmation\": \"architecto\"
-}"
-</code></pre></div>
+    --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
@@ -511,23 +509,24 @@ const headers = {
     "Accept": "application/json",
 };
 
-let body = {
-    "name": "architecto",
-    "email": "gbailey@example.net",
-    "password": "|]|{+-",
-    "password_confirmation": "architecto"
-};
-
 fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
 
 <span id="example-responses-POSTapi-auth-logout">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Successfully logged out&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-auth-logout" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-auth-logout"></span>:
@@ -608,302 +607,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="name"                data-endpoint="POSTapi-auth-logout"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>The user's name. Example: <code>architecto</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-auth-logout"
-               value="gbailey@example.net"
-               data-component="body">
-    <br>
-<p>The user's email. Example: <code>gbailey@example.net</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="password"                data-endpoint="POSTapi-auth-logout"
-               value="|]|{+-"
-               data-component="body">
-    <br>
-<p>The password (min 6). Example: <code>|]|{+-</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="password_confirmation"                data-endpoint="POSTapi-auth-logout"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>Must match the password. Example: <code>architecto</code></p>
-        </div>
-        </form>
-
-                    <h2 id="endpoints-GETapi-user">GET api/user</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-user">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/user" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/user"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-user">
-            <blockquote>
-            <p>Example response (401):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-user" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-user"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-user"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-user" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-user">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-user" data-method="GET"
-      data-path="api/user"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-user', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-user"
-                    onclick="tryItOut('GETapi-user');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-user"
-                    onclick="cancelTryOut('GETapi-user');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-user"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/user</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-user"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-user"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
                         </form>
 
-                    <h2 id="endpoints-GETapi-hello">GET api/hello</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-hello">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/hello" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/hello"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-hello">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Hello from API!&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-hello" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-hello"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-hello"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-hello" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-hello">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-hello" data-method="GET"
-      data-path="api/hello"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-hello', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-hello"
-                    onclick="tryItOut('GETapi-hello');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-hello"
-                    onclick="cancelTryOut('GETapi-hello');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-hello"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/hello</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-hello"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-hello"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        </form>
-
-                    <h2 id="endpoints-GETapi-tasks">GET api/tasks</h2>
+                    <h2 id="endpoints-GETapi-tasks">Get all tasks.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -943,20 +649,21 @@ fetch(url, {
 
 <span id="example-responses-GETapi-tasks">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
+<code class="language-json" style="max-height: 300px;">[
+    {
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;Task 1&quot;,
+        &quot;description&quot;: &quot;Description&quot;,
+        &quot;assigned_to&quot;: 2,
+        &quot;status&quot;: &quot;pending&quot;,
+        &quot;start_date&quot;: &quot;2025-06-01&quot;,
+        &quot;end_date&quot;: &quot;2025-06-10&quot;
+    }
+]</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-tasks" hidden>
@@ -1041,7 +748,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-POSTapi-tasks">POST api/tasks</h2>
+                    <h2 id="endpoints-POSTapi-tasks">Create a new task.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -1060,12 +767,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"title\": \"b\",
-    \"description\": \"Eius et animi quos velit et.\",
-    \"assigned_to\": \"architecto\",
-    \"status\": \"architecto\",
-    \"start_date\": \"2025-06-16T22:54:27\",
-    \"end_date\": \"2051-07-10\"
+    \"title\": \"\\\"New task\\\"\",
+    \"description\": \"\\\"Task details\\\"\",
+    \"assigned_to\": 2,
+    \"status\": \"pending\",
+    \"start_date\": \"\\\"2025-06-01\\\"\",
+    \"end_date\": \"\\\"2025-06-10\\\"\"
 }"
 </code></pre></div>
 
@@ -1082,12 +789,12 @@ const headers = {
 };
 
 let body = {
-    "title": "b",
-    "description": "Eius et animi quos velit et.",
-    "assigned_to": "architecto",
-    "status": "architecto",
-    "start_date": "2025-06-16T22:54:27",
-    "end_date": "2051-07-10"
+    "title": "\"New task\"",
+    "description": "\"Task details\"",
+    "assigned_to": 2,
+    "status": "pending",
+    "start_date": "\"2025-06-01\"",
+    "end_date": "\"2025-06-10\""
 };
 
 fetch(url, {
@@ -1099,7 +806,22 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-tasks">
-</span>
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 3,
+    &quot;title&quot;: &quot;New task&quot;,
+    &quot;description&quot;: &quot;Task details&quot;,
+    &quot;assigned_to&quot;: 2,
+    &quot;status&quot;: &quot;pending&quot;,
+    &quot;start_date&quot;: &quot;2025-06-01&quot;,
+    &quot;end_date&quot;: &quot;2025-06-10&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-tasks" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-tasks"></span>:
@@ -1187,10 +909,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="title"                data-endpoint="POSTapi-tasks"
-               value="b"
+               value=""New task""
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>b</code></p>
+<p>The title of the task. Example: <code>"New task"</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
@@ -1198,21 +920,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="description"                data-endpoint="POSTapi-tasks"
-               value="Eius et animi quos velit et."
+               value=""Task details""
                data-component="body">
     <br>
-<p>Example: <code>Eius et animi quos velit et.</code></p>
+<p>The description of the task. Example: <code>"Task details"</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>assigned_to</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="assigned_to"                data-endpoint="POSTapi-tasks"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="assigned_to"                data-endpoint="POSTapi-tasks"
+               value="2"
                data-component="body">
     <br>
-<p>The <code>id</code> of an existing record in the users table. Example: <code>architecto</code></p>
+<p>User ID the task is assigned to. Example: <code>2</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
@@ -1220,36 +942,36 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-tasks"
-               value="architecto"
+               value="pending"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>The status of the task. Possible values: pending, in_progress, completed. Example: <code>pending</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>start_date</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>date</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="start_date"                data-endpoint="POSTapi-tasks"
-               value="2025-06-16T22:54:27"
+               value=""2025-06-01""
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-06-16T22:54:27</code></p>
+<p>The start date of the task. Example: <code>"2025-06-01"</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_date</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>date</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="end_date"                data-endpoint="POSTapi-tasks"
-               value="2051-07-10"
+               value=""2025-06-10""
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>start_date</code>. Example: <code>2051-07-10</code></p>
+<p>The end date of the task (must be after or equal to start_date). Example: <code>"2025-06-10"</code></p>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-tasks--id-">GET api/tasks/{id}</h2>
+                    <h2 id="endpoints-GETapi-tasks--id-">Get a specific task by ID.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -1263,7 +985,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/tasks/architecto" \
+    --get "http://localhost/api/tasks/17" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1271,7 +993,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/tasks/architecto"
+    "http://localhost/api/tasks/17"
 );
 
 const headers = {
@@ -1289,19 +1011,27 @@ fetch(url, {
 
 <span id="example-responses-GETapi-tasks--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Task 1&quot;,
+    &quot;description&quot;: &quot;Description&quot;,
+    &quot;assigned_to&quot;: 2,
+    &quot;status&quot;: &quot;pending&quot;,
+    &quot;start_date&quot;: &quot;2025-06-01&quot;,
+    &quot;end_date&quot;: &quot;2025-06-10&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Task not found&quot;
 }</code>
  </pre>
     </span>
@@ -1388,24 +1118,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-tasks--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-tasks--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the task. Example: <code>architecto</code></p>
+<p>The ID of the task. Example: <code>17</code></p>
             </div>
                     </form>
 
-                    <h2 id="endpoints-PUTapi-tasks--id-">PUT api/tasks/{id}</h2>
+                    <h2 id="endpoints-PUTapi-tasks--id-">Update only the status of a task.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>Here are status options: pending, active, completed, deferred, rejected</p>
 
 <span id="example-requests-PUTapi-tasks--id-">
 <blockquote>Example request:</blockquote>
@@ -1413,23 +1143,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/tasks/architecto" \
+    "http://localhost/api/tasks/17" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"title\": \"b\",
-    \"description\": \"Eius et animi quos velit et.\",
-    \"assigned_to\": \"architecto\",
-    \"start_date\": \"2025-06-16T22:54:27\",
-    \"end_date\": \"2051-07-10\"
+    \"status\": \"consequatur\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/tasks/architecto"
+    "http://localhost/api/tasks/17"
 );
 
 const headers = {
@@ -1439,11 +1165,7 @@ const headers = {
 };
 
 let body = {
-    "title": "b",
-    "description": "Eius et animi quos velit et.",
-    "assigned_to": "architecto",
-    "start_date": "2025-06-16T22:54:27",
-    "end_date": "2051-07-10"
+    "status": "consequatur"
 };
 
 fetch(url, {
@@ -1455,7 +1177,31 @@ fetch(url, {
 </span>
 
 <span id="example-responses-PUTapi-tasks--id-">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 3,
+    &quot;title&quot;: &quot;Some task&quot;,
+    &quot;description&quot;: &quot;Some description&quot;,
+    &quot;assigned_to&quot;: 1,
+    &quot;status&quot;: &quot;active&quot;,
+    &quot;start_date&quot;: &quot;2025-06-01&quot;,
+    &quot;end_date&quot;: &quot;2025-06-10&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Task not found&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-tasks--id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-tasks--id-"></span>:
@@ -1539,85 +1285,30 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="PUTapi-tasks--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-tasks--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the task. Example: <code>architecto</code></p>
+<p>The ID of the task. Example: <code>17</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="title"                data-endpoint="PUTapi-tasks--id-"
-               value="b"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>b</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="description"                data-endpoint="PUTapi-tasks--id-"
-               value="Eius et animi quos velit et."
-               data-component="body">
-    <br>
-<p>Example: <code>Eius et animi quos velit et.</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>assigned_to</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="assigned_to"                data-endpoint="PUTapi-tasks--id-"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>The <code>id</code> of an existing record in the users table. Example: <code>architecto</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-tasks--id-"
-               value=""
+               value="consequatur"
                data-component="body">
     <br>
-
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>start_date</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="start_date"                data-endpoint="PUTapi-tasks--id-"
-               value="2025-06-16T22:54:27"
-               data-component="body">
-    <br>
-<p>Must be a valid date. Example: <code>2025-06-16T22:54:27</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>end_date</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="end_date"                data-endpoint="PUTapi-tasks--id-"
-               value="2051-07-10"
-               data-component="body">
-    <br>
-<p>Must be a valid date. Must be a date after or equal to <code>start_date</code>. Example: <code>2051-07-10</code></p>
+<p>The status of the task. Possible values: pending, active, completed, deferred, rejected Example: <code>consequatur</code></p>
         </div>
         </form>
 
-                    <h2 id="endpoints-DELETEapi-tasks--id-">DELETE api/tasks/{id}</h2>
+                    <h2 id="endpoints-DELETEapi-tasks--id-">Delete a task.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -1631,7 +1322,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/tasks/architecto" \
+    "http://localhost/api/tasks/17" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1639,7 +1330,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/tasks/architecto"
+    "http://localhost/api/tasks/17"
 );
 
 const headers = {
@@ -1656,7 +1347,25 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-tasks--id-">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Task deleted&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Task not found&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-tasks--id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-tasks--id-"></span>:
@@ -1740,14 +1449,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-tasks--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-tasks--id-"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the task. Example: <code>architecto</code></p>
+<p>The ID of the task. Example: <code>17</code></p>
             </div>
                     </form>
 

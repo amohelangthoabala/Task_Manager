@@ -7,8 +7,8 @@ This guide outlines how to set up and use the application in both development an
 
 ### 1. Clone the Repository
 
-git clone https://your-repo-url.git
-cd your-repo-directory
+git clone https://github.com/amohelangthoabala/Task_Manager.git
+cd Task_Manager
 
 ### 2. Prerequisites
 
@@ -65,6 +65,9 @@ Authorization: Bearer {token}
 
 ## ✅ Task Management
 
+- Two ways to use the API, use Endpoint or API documentation
+- API docs work like postman but on the browser, you just visit localhost/api
+
 ### Create a Task
 
 * **Method:** `POST`
@@ -78,3 +81,16 @@ Authorization: Bearer {token}
 
 Update the `status` field as needed in your request body.
 
+## If DOcker is not working Here is and alternative
+## ⚙ Laravel Flow (Manual Setup)
+
+
+To install **Laravel** on your local machine, make sure you have:
+
+- [PHP 8.1 or higher](https://www.php.net/downloads/)  
+- [Composer](https://getcomposer.org/) 
+
+cd task_manager
+
+composer install
+php artisan serve
