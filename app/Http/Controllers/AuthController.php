@@ -6,6 +6,15 @@ use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
+/**
+ * Register a new user.
+ *
+ * @bodyParam name string required The user's name.
+ * @bodyParam email string required The user's email.
+ * @bodyParam password string required The password (min 6).
+ * @bodyParam password_confirmation string required Must match the password.
+ */
+
 class AuthController extends Controller
 {
     protected $authService;
@@ -40,7 +49,9 @@ class AuthController extends Controller
 
         return response()->json($result);
     }
-
+/**
+ * @authenticated
+ */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

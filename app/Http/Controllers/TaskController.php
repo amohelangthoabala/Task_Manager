@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Task;
 
+/**
+ * @authenticated
+ */
 class TaskController extends Controller
 {
     protected $taskService;
