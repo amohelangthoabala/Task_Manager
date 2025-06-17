@@ -10,6 +10,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 });
+Route::post('/token', [AuthController::class, 'generateTestUserToken']); 
 
 Route::middleware('auth:sanctum')->prefix('tasks')->group(function () {
     Route::get('/', [TaskController::class, 'index']);
